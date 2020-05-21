@@ -2,6 +2,7 @@ package com.example.instagramclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class SignUp extends AppCompatActivity {
     EditText edtName, edtKickSpeed, edtKickPower;
-    Button btnSave, btnGetAll;
+    Button btnSave, btnGetAll, btnTransition;
     TextView textView;
     private String allKickBoxers;
     @Override
@@ -33,6 +34,7 @@ public class SignUp extends AppCompatActivity {
         edtKickSpeed = findViewById(R.id.edtKickSpeed);
         btnSave = findViewById(R.id.btnSave);
         btnGetAll = findViewById(R.id.btnGetAll);
+        btnTransition = findViewById(R.id.btnTransition);
         textView = findViewById(R.id.textView);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,14 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+        btnTransition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this,
+                                            SignUpLoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void btnSaveIsTapped(View view){
 //        ParseObject boxer = new ParseObject("Boxer");
@@ -115,4 +125,6 @@ public class SignUp extends AppCompatActivity {
            FancyToast.makeText(this,e.getMessage(),FancyToast.LENGTH_LONG,FancyToast.ERROR,true).show();
        }
     }
+
+
 }
