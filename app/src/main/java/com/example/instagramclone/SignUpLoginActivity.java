@@ -1,5 +1,6 @@
 package com.example.instagramclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -48,6 +50,27 @@ public class SignUpLoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logInInBackground(edtUsernameLogin.getText().toString(),
+                        edtPassowordLogin.getText().toString(),
+                        new LogInCallback() {
+                            @Override
+                            public void done(ParseUser user, ParseException e) {
+                                if(user != null && e== null){
+                                    FancyToast.makeText(SignUpLoginActivity.this, user.get("username") + " is logged in successfully" , FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                                    Intent intent = new Intent(SignUpLoginActivity.this, WelcomeActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    FancyToast.makeText(SignUpLoginActivity.this, e.getMessage() , FancyToast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                                }
+                            }
+                        });
             }
         });
 
