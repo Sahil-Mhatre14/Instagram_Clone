@@ -44,6 +44,25 @@ public class ProfileTab extends Fragment {
         edtFavSport = view.findViewById(R.id.edtFavSport);
 
         final ParseUser parseUser = ParseUser.getCurrentUser();
+        if(parseUser.get("profileName") != null || parseUser.get("bio") != null || parseUser.get("profession") != null
+                || parseUser.get("hobbies") !=null || parseUser.get("favouriteSport") != null){
+            edtProfileName.setText(parseUser.get("profileName").toString());
+            edtBio.setText(parseUser.get("bio").toString());
+            edtProfession.setText(parseUser.get("profession").toString());
+            edtHobbies.setText(parseUser.get("hobbies").toString());
+            edtFavSport.setText(parseUser.get("favouriteSport").toString());
+        }
+        else {
+            edtProfileName.setText("");
+            edtBio.setText("");
+            edtProfession.setText("");
+            edtHobbies.setText("");
+            // setHint sets the hint and "" also sets the hint used in layout
+            //so both are same
+            edtFavSport.setHint("Enter Favourite Sport");
+        }
+
+
 
         btnUpdateInfo.setOnClickListener(new View.OnClickListener() {
             @Override
