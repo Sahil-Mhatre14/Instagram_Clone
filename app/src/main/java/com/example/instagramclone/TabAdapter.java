@@ -23,7 +23,8 @@ public class TabAdapter extends FragmentPagerAdapter {
                 return new UsersTab();
 
             case 2:
-                return new SharePicturesTab();
+                SharePicturesTab sharePicturesTab = new SharePicturesTab();
+                return (sharePicturesTab);
 
             default:
                 return null;
