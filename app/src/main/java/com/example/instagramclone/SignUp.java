@@ -78,6 +78,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                 final ProgressDialog progressDialog = new ProgressDialog(this);
                 progressDialog.setMessage("Signing Up " + edtUsername.getText().toString());
+                progressDialog.show();
                 appUser.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
@@ -101,6 +102,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnLogin:
                 Intent intent = new Intent(SignUp.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
 
@@ -120,5 +122,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void transitionToSocialMediaActivity(){
         Intent intent = new Intent(SignUp.this, SocialMediaActivity.class);
         startActivity(intent);
+        finish();
     }
 }

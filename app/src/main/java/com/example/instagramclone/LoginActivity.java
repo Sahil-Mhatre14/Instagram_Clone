@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } else {
                     final ProgressDialog progressDialog = new ProgressDialog(this);
                     progressDialog.setMessage("Logging In");
+                    progressDialog.show();
                     ParseUser.logInInBackground(edtEmailLogin.getText().toString(),
                             edtPasswordLogin.getText().toString(),
                             new LogInCallback() {
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnSignUpLogin:
                 Intent intent = new Intent(LoginActivity.this,SignUp.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -101,5 +103,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void transitionToSocialMediaActivity(){
         Intent intent = new Intent(LoginActivity.this, SocialMediaActivity.class);
         startActivity(intent);
+        finish();
     }
 }
