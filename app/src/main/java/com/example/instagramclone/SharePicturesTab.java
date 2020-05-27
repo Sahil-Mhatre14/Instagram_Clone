@@ -94,9 +94,6 @@ public class SharePicturesTab extends androidx.fragment.app.Fragment implements 
                                 FancyToast.CONFUSING,true).show();
                     }
                     else {
-                        final ProgressDialog dialog = new ProgressDialog(getContext());
-                        dialog.setMessage("Uploading...");
-                        dialog.show();
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         selectedImage.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                         byte[] bytes = byteArrayOutputStream.toByteArray();
@@ -104,7 +101,10 @@ public class SharePicturesTab extends androidx.fragment.app.Fragment implements 
                         ParseObject parseObject = new ParseObject("Photo");
                         parseObject.put("picture",parseFile);
                         parseObject.put("imageDescription", edtDescription.getText().toString());
-                        parseObject.put("user", ParseUser.getCurrentUser().getUsername());
+                        parseObject.put("username", ParseUser.getCurrentUser().getUsername());
+                        final ProgressDialog dialog = new ProgressDialog(getContext());
+                        dialog.setMessage("Uploading...");
+                        dialog.show();
 
                         parseObject.saveInBackground(new SaveCallback() {
                             @Override
