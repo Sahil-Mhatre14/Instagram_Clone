@@ -149,7 +149,7 @@ public class ProfileTab extends Fragment {
                     parseObject.put("dp", parseFile);
                     parseObject.put("username",ParseUser.getCurrentUser().getUsername());
 //                    parseUser.put("profilePic", parseFile);
-                    ProgressDialog dialog = new ProgressDialog(getContext());
+                    final ProgressDialog dialog = new ProgressDialog(getContext());
                     dialog.setMessage("Updating Profile Picture...");
                     dialog.show();
 
@@ -163,10 +163,11 @@ public class ProfileTab extends Fragment {
                                 FancyToast.makeText(getContext(),e.getMessage(), Toast.LENGTH_LONG,
                                         FancyToast.ERROR, true).show();
                             }
+                            dialog.dismiss();
                         }
                     });
 
-                    dialog.dismiss();
+
 
                 }
             }
@@ -212,8 +213,9 @@ public class ProfileTab extends Fragment {
     }
 
     public void loadUserDP() {
-        final ParseQuery<ParseObject> parseQuery = new ParseQuery("DisplayPicture");
+        final ParseQuery<ParseObject> parseQuery = ParseQuery.getQuery("DisplayPicture");
         parseQuery.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+        parseQuery.orderByDescending("createdAt");
         parseQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
@@ -233,6 +235,8 @@ public class ProfileTab extends Fragment {
                                 }
                             }
                         });
+                        break;
+
                     }
 
                 } else {
