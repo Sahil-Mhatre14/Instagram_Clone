@@ -81,6 +81,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
         parseQuery.whereEqualTo("username", arrayList.get(position));
+
         parseQuery.getFirstInBackground(new GetCallback<ParseUser>() {
             @Override
             public void done(ParseUser user, ParseException e) {
