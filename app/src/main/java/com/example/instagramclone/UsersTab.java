@@ -1,6 +1,7 @@
 package com.example.instagramclone;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -33,6 +35,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
     private ListView listView;
     private ArrayList<String> arrayList;
     private ArrayAdapter arrayAdapter;
+    private Bitmap userDP;
     public UsersTab() {
         // Required empty public constructor
     }
@@ -78,8 +81,8 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
     }
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
+    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+        final ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
         parseQuery.whereEqualTo("username", arrayList.get(position));
 
         parseQuery.getFirstInBackground(new GetCallback<ParseUser>() {
